@@ -34,24 +34,8 @@ int count_node(Node<int>*head){
 
 Node<int> *sortTwoLists(Node<int> *first, Node<int> *second)
 {
-    // Write your code here.
-//     int cnt1 = count_node(first);
-//     int cnt2 = count_node(second);
-    
+     
     Node<int> *head;
-//     if(cnt1==0 or cnt2==0){
-//         // Enter special case dude
-//         if(cnt1==0 and cnt2!=0)
-//         {   head=second;
-//             second=second->next;
-//         }
-//     else if(cnt1!=0 and cnt2==0){
-//         head=first;
-//         first=first->next;
-//     }
-//     else return first;
-               
-//     }
     
     if(first==NULL)return second;
     else if (second==NULL) return first;
