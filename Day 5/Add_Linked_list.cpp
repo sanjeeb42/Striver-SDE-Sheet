@@ -46,3 +46,38 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         // return the head of our answer which is head -> next;
         return head -> next;
     }
+
+// Aliter
+
+Node *addTwoNumbers(Node *l1, Node *l2)
+{
+    // Write your code here.
+    int carry=0;
+    Node* ans=new Node(0),*head=ans;        
+       
+     while(l1!=NULL or l2!=NULL)
+        {
+            int val=0;
+            if(l1!=NULL){
+                val+=l1->data;
+                l1=l1->next;
+            }
+            if(l2!=NULL){
+                val+=l2->data;
+                l2=l2->next;
+            }
+            val+=carry;
+            Node*temp=new Node(val%10);
+            carry=val/10;
+            ans->next=temp;   
+            ans=temp;         
+        }
+        
+        if(carry>0){
+            Node* temp=new Node(carry);
+            ans->next=temp;
+            ans=temp;
+        }
+        return head->next;
+   
+}
