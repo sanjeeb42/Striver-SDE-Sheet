@@ -1,3 +1,3 @@
 # Striver-SDE-Sheet
 
-This will contain all the problems I solve while completing the SDE sheet.
+This will act as a notebook to store the accepted solution of Striver SDE Sheet.
