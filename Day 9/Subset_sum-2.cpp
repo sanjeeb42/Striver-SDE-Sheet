@@ -32,3 +32,27 @@ vector<vector<int>> uniqueSubsets(int n, vector<int> &arr)
     return ans;
     
 }
+
+
+// Iterative_unsorted
+
+#include<bits/stdc++.h>
+vector<vector<int>> uniqueSubsets(int n, vector<int> &arr)
+{
+    // Write your code here.
+    vector<vector<int>>ans;
+    ans.push_back({});
+    for(int i=0;i<n;i++)
+    {
+        vector<int>curr;
+        for(int j=i;j<n;j++){
+            curr.push_back(arr[j]);
+            if(find(ans.begin(),ans.end(),curr)==ans.end())
+            {
+                ans.push_back(curr);
+            }
+        }
+        
+    }
+    return ans;
+}
