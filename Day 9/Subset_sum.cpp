@@ -21,8 +21,6 @@ vector<int> subsetSum(vector<int> &num)
 }
 
 
-
-
 //recursive -O(2^n) time and O(n) space
 
 void solve(vector<int>&ans,vector<int>nums,int index,int curr_sum){
