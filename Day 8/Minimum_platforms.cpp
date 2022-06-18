@@ -1,3 +1,5 @@
+//My approach -o(nlogn) time for traversing + 0(2nlogn) sort
+
 #include<bits/stdc++.h>
 int count(int arr[], int x, int n)
 {   
@@ -35,4 +37,38 @@ int calculateMinPatforms(int at[], int dt[], int n) {
     }
     
     return maxi;
+}
+
+
+
+// Efficent approach - O92nlogn) sort time+ O(n) traverse time
+
+int calculateMinPatforms(int at[], int dt[], int n) {
+    // Write your code here.
+    sort(at,at+n);
+    sort(dt,dt+n);
+    
+    int start1=1,start2=0;
+    int ans=1;
+    int platform_need=1;
+    while(start1<n && start2<n){
+        // If arrival time of new train is smaller than or equal the departaure timeof 
+        //all the trains avialble on station, New platfrom needed
+        
+        if(at[start1]<=dt[start2]){
+            platform_need++;
+            start1++;
+        }
+        
+        //departure time of any train standing on the station 
+        //is smaller than the arrival time, Then it will first leave the platfrom .           //hence platform free
+        else {
+            platform_need--;
+            start2++;
+        }
+        
+        ans=max(ans,platform_need);
+    }
+    
+    return ans;
 }
