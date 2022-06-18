@@ -1,3 +1,24 @@
+//SuperNaive
+
+int calculateMinPatforms(int at[], int dt[], int n) {
+// Array to store the number of platforms required at different points of time.
+    int platforms[2360] = {0};
+    int minNumOfPlatforms = 1;
+
+    for (int i = 0; i < n; i++) {
+        // Increment number of platforms for all times between arrival and departure (both inclusive).
+        platforms[at[i]]++;
+        platforms[dt[i]+1]--;
+        }
+    
+    for(int i=1;i<2360;i++){
+        platforms[i]=platforms[i-1]+platforms[i];
+        minNumOfPlatforms=max(minNumOfPlatforms,platforms[i]);
+    }
+    return minNumOfPlatforms;
+}
+
+
 //My approach -o(nlogn) time for traversing + 0(2nlogn) sort
 
 #include<bits/stdc++.h>
