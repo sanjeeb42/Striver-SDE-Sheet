@@ -21,3 +21,32 @@ string reverseString(string str)
     return tmp;
     
 }
+
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    string s = "Hey, How are you doing?";
+    stack<string> ans;
+    for (int i = 0; i<s.length(); i++)
+    {
+        string tmp = "";
+        int j = i;
+        while (j < s.length() && s[j] != ' ')
+        {
+            tmp += s[j++];
+        }
+        i = j;
+
+        //cout << tmp << endl;
+         ans.push(tmp);
+    }
+    while (!ans.empty())
+    {
+        cout << ans.top() << " ";
+        ans.pop();
+    }
+    return 0;
+}
