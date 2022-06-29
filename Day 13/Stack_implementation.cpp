@@ -10,13 +10,13 @@ public:
     {
         // Write your code here.
        size=0;
-       arr=new int(sizeof(int)*capacity);
-       max_size=capacity;       
+       arr=new int[capacity];
+       max_size=capacity;    
     }
 
     void push(int num) {
         // Write your code here.
-        if(size>=max_size)return;
+        if(size==max_size)return;
         else {
             arr[size++]=num;
         }
@@ -27,13 +27,13 @@ public:
         if(size==0){
             return -1;
         }
-        return arr[size--];
+        return arr[--size];
     }
     
     int top() {
         // Write your code here.
         if(size==0) return -1;
-        return arr[size];
+        return arr[size-1];
     }
     
     int isEmpty() {
@@ -44,7 +44,7 @@ public:
     
     int isFull() {
         // Write your code here.
-        if(size==max_size) return 1;
+        if(size==max_size)return 1;
         return 0;
     }
     
