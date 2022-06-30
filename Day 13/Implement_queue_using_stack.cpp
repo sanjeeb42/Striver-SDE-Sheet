@@ -1,3 +1,69 @@
+//0(1) amortised Time --For explanation refere to notes
+
+
+#include<bits/stdc++.h>
+class Queue {
+    // Define the data members(if any) here.
+    stack<int>s1,s2;
+    public:
+    Queue() {
+        // Initialize your data structure here.
+    }
+
+    void enQueue(int val) {
+        // Implement the enqueue() function.
+        s1.push(val);
+    }
+
+    int deQueue() {
+        // Implement the dequeue() function.
+        int data=-1;
+        if(!s2.empty()){
+            data=s2.top();
+            s2.pop();
+            return data;
+        }
+        else if(s1.empty()==false)
+        {
+            while(!s1.empty()){
+                s2.push(s1.top());
+                s1.pop();
+            }
+            data=s2.top();
+            s2.pop();
+        }
+        return data;
+    }
+
+    int peek() {
+        // Implement the peek() function here.
+        int data=-1;
+        if(s2.empty()==false){
+            data=s2.top();
+        }
+        else if(s1.empty()==false){
+            while(!s1.empty()){
+                s2.push(s1.top());
+                s1.pop();
+            }
+            data=s2.top();
+        }
+        return data;
+        
+    }
+
+    bool isEmpty() {
+        // Implement the isEmpty() function here.
+        return s1.empty() && s2.empty();
+    }
+};
+
+
+
+//0(N) 
+
+
+
 #include<bits/stdc++.h>
 class Queue {
     // Define the data members(if any) here.
