@@ -6,7 +6,58 @@ like if the list is 1->2->3->4->NULL
 
 3. Separate the two lists
 
+//Using Map
 
+/*
+	Time complexity: O(N)
+	Space complexity: O(N)
+
+	Where 'N' is the number of nodes in the list.
+*/
+
+#include <unordered_map>
+
+// Returns head reference of cloned linked list.
+LinkedListNode<int> *cloneRandomList(LinkedListNode<int> *head)
+{
+    // Initialize two references, one with original list's head.
+    LinkedListNode<int> *origCurr = head, *cloneCurr = NULL;
+
+    /*
+	    Hash map which contains node to node 
+		mapping of original and clone linked list.
+	*/
+    unordered_map<LinkedListNode<int> *, LinkedListNode<int> *> map;
+
+    /*
+	    Traverse the original list and make a copy of that
+        in the clone linked list.
+	*/
+    while (origCurr != NULL)
+    {
+        cloneCurr = new LinkedListNode<int>(origCurr->data);
+        map.insert(make_pair(origCurr, cloneCurr));
+        origCurr = origCurr->next;
+    }
+
+    // Adjusting the original list reference again.
+    origCurr = head;
+
+    /*
+	    Traversal of original list again to adjust the next
+        and random references of clone list using hash map.
+	*/
+    while (origCurr != NULL)
+    {
+        cloneCurr = map[origCurr];
+        cloneCurr->next = map[origCurr->next];
+        cloneCurr->random = map[origCurr->random];
+        origCurr = origCurr->next;
+    }
+
+    // Return the head reference of the clone list.
+    return map[head];
+}
 
 #include <bits/stdc++.h> 
 /*************************************************************
