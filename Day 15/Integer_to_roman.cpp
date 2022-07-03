@@ -1,29 +1,24 @@
+#include<bits/stdc++.h>
 class Solution {
 public:
     string intToRoman(int num) {
         
 
         
-        vector<pair<int,string>>mapping;
-        mapping.push_back({1000,"M"});
-        mapping.push_back({900,"CM"});
-        mapping.push_back({500,"D"});
-        mapping.push_back({400,"CD"});
-        mapping.push_back({100,"C"});
-        mapping.push_back({90,"XC"});
-        mapping.push_back({50,"L"});
-        mapping.push_back({40,"XL"});
-        mapping.push_back({10,"X"});
-        mapping.push_back({9,IX});
-        mapping.push_back({5,"V"});
-        mapping.push_back({4,"IV"});
-        mapping.push_back({1,"I"});
-        
-        
+    vector<string>mapping={"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};      
+    vector<int>val={1000,900,500,400,100,90,50,40,10,9,5,4,1};
         
        string ans="";
-       for(int i=0;i<14;i++){
+       for(int i=0;i<val.size();i++){
+           int tmp=num/val[i];
            
+           for(int j=0;j<tmp;j++){
+               ans+=mapping[i];
+           }
+           
+           num=num-tmp*val[i];
        }
+        
+        return ans;
     }
 };
