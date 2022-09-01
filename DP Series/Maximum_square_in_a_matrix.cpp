@@ -1,4 +1,5 @@
- int solve(vector<vector<int>>&matrix,int i,int j,int &maxi,vector<vector<int>>&dp){
+ 
+int solve(vector<vector<int>>&matrix,int i,int j,int &maxi,vector<vector<int>>&dp){
         
         int n=matrix.size(), m=matrix[0].size();
         //base case
@@ -29,4 +30,38 @@
         
         return maxi;
         
+    }
+
+
+//Tabulation
+
+ int maximalSquare(vector<vector < char>> &matrix)
+    {
+        int maxi = 0;
+
+        int n = matrix.size(), m = matrix[0].size();
+
+        vector<vector < int>> dp(n + 1, vector<int> (m + 1, 0));
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            for (int j = m - 1; j >= 0; j--)
+            {
+                if (matrix[i][j] == '0')
+                {
+                    dp[i][j] = 0;
+                }
+                else if (matrix[i][j] == '1')
+                {
+                    int down = dp[i + 1][j];
+                    int right = dp[i][j + 1];
+                    int diagonal = dp[i + 1][j + 1];
+
+                    dp[i][j] = 1 + min(min(down, right), diagonal);
+                    maxi = max(maxi, dp[i][j]);
+                }
+            }
+        }
+
+        return maxi * maxi;
     }
