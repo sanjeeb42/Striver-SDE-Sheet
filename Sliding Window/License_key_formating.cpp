@@ -1,3 +1,5 @@
+https://practice.geeksforgeeks.org/problems/license-key-formatting/1
+
 string ReFormatString(string s, int K){
     	string ans="";
     	int n=s.length();
