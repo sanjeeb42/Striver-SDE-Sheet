@@ -1,3 +1,5 @@
+//Basically It is Pascal's Triangle.
+
 int m=1e9+7;
   
   long long int factorial(int n,int r){
