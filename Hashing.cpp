@@ -1,3 +1,5 @@
+//Aliter way we can use a freq array
+
 class Solution{
   public:
     vector <int> countDistinct (int arr[], int n, int k)
