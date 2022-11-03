@@ -1,5 +1,7 @@
 //https://practice.geeksforgeeks.org/problems/array-removals/1
 
+2 solution- One using Dp and other using binary serach
+
 
 class Solution{
     public:
@@ -32,3 +34,23 @@ class Solution{
         //return ans;
     }
 };
+
+
+//Binary Search
+
+ public:
+    int removals(vector<int>& arr, int k){
+        //Code here
+        int n=arr.size();
+        sort(arr.begin(),arr.end());
+
+        int ans=n;
+        for(int i=0;i<n;i++)
+        {
+            int target=arr[i]+k;
+            auto it=lower_bound(arr.begin()+i,arr.end(),target);
+            int index=it-arr.begin();
+            ans=min(ans,n-index+i);
+        }
+        return ans;
+    }
