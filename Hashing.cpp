@@ -5,7 +5,7 @@ class Solution{
     vector <int> countDistinct (int arr[], int n, int k)
     {
         //code here.
-        unordered_map<int,int>mp;
+        unordered_map<int,int>mp;//lol
         vector<int>ans;
         for(int i=0;i<k-1;i++){
             mp[arr[i]]++;
