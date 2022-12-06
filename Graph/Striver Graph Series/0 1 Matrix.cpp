@@ -1,54 +1,63 @@
-class Solution 
+class Solution
 {
     public:
-    //Function to find the distance of nearest 1 in the grid for each cell.
-	vector<vector<int>>nearest(vector<vector<int>>grid)
-	{
-	    int n = grid.size(); 
-	    int m = grid[0].size(); 
-	    // visited and distance matrix
-	    vector<vector<int>> vis(n, vector<int>(m, 0)); 
-	    vector<vector<int>> dist(n, vector<int>(m, 0)); 
-	    // <coordinates, steps>
-	    queue<pair<pair<int,int>, int>> q; 
-	    // traverse the matrix
-	    for(int i = 0;i<n;i++) {
-	        for(int j = 0;j<m;j++) {
-	            // start BFS if cell contains 1
-	            if(grid[i][j] == 1) {
-	                q.push({{i,j}, 0}); 
-	                vis[i][j] = 1; 
-	            }
-	            else {
-	                // mark unvisited 
-	                vis[i][j] = 0; 
-	            }
-	        }
-	    }
-	    
-	    int delrow[] = {-1, 0, +1, 0}; 
-	    int delcol[] = {0, +1, 0, -1}; 
-	    
-	    // traverse till queue becomes empty
-	    while(!q.empty()) {
-	        int row = q.front().first.first; 
-	        int col = q.front().first.second; 
-	        int steps = q.front().second; 
-	        q.pop(); 
-	        dist[row][col] = steps; 
-	        // for all 4 neighbours
-	        for(int i = 0;i<4;i++) {
-	            int nrow = row + delrow[i]; 
-	            int ncol = col + delcol[i]; 
-	            // check for valid unvisited cell
-	            if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m 
-	            && vis[nrow][ncol] == 0) {
-	                vis[nrow][ncol] = 1; 
-	                q.push({{nrow, ncol}, steps+1});  
-	            }
-	        }
-	    }
-	    // return distance matrix
-	    return dist; 
-	}
+        vector<int> dx = { -1,
+            0,
+            0,
+            1
+        };
+    vector<int> dy = { 0,
+        1,
+        -1,
+        0
+    };
+
+    bool issafe(int i, int j, int n, int m)
+    {
+        if (i < 0 or j < 0 or i >= n or j >= m) return false;
+        return true;
+    }
+    vector<vector < int>> updateMatrix(vector<vector < int>> &mat)
+    {
+        int n = mat.size(), m = mat[0].size();
+        vector<vector < int>> ans(n, vector<int> (m, -1));
+
+        queue<pair<int, int>> q;	// i,j,distance
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (mat[i][j] == 0)
+                {
+                    ans[i][j] = 0;
+                    q.push({ i,
+                        j });
+                }
+            }
+        }
+
+       	//Now time to try bfs 
+       	// If we encounter 1 we will update the value
+        int level = 0;
+        while (q.size() > 0)
+        {
+            auto front = q.front();
+            q.pop();
+
+            for (int k = 0; k < 4; k++)
+            {
+                int newx = front.first + dx[k];
+                int newy = front.second + dy[k];
+
+                if (issafe(newx, newy, n, m) && ans[newx][newy] == -1)
+                {
+                    ans[newx][newy] = ans[front.first][front.second] + 1;
+                    q.push({ newx,
+                        newy });
+                }
+            }
+        }
+
+        return ans;
+    }
 };
