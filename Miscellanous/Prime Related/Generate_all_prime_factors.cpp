@@ -78,3 +78,25 @@ int main()
     }
     return 0;
 }
+
+
+vector<int>primes;
+    vector<int>visited;
+    
+    void prime(){
+        visited.resize(1e4+1,0);
+        for(int i=2;i*i<=1e4;i++){
+            if(visited[i]==0){
+                for(int j=i+1;j*i<=1e4;j++){
+                    visited[i*j]=1;
+                }
+            }
+        }
+        
+        for(int i=2;i<=1e4;i++){
+            if(visited[i]==0){
+                primes.push_back(i);
+            }
+        }
+        
+    }
