@@ -1,44 +1,35 @@
+// DSU class from Sanjeeb - Template github -https://github.com/sanjeeb42/Striver-SDE-Sheet/blob/main/Disjoint%20Set%20%26%20Union/DSUClass.cpp
 class DSU {
     public:
-    vector<int>parent,rank;
-    DSU(int n){
-        parent.resize(n);
-        rank.resize(n);
-        for (int i = 0; i < n; i++)
-        {
+    vector<int> parent;
+    vector<int> rank;
+
+    DSU(int n) {
+        parent.resize(n+1);
+        for (int i = 0; i < n; i++) {
             parent[i] = i;
-            rank[i] = 0;
         }
+        rank.resize(n+1, 0);
     }
 
-    int findparent(int node)
-    {
-        if (parent[node] == node) return node;
-        return parent[node] = findparent(parent[node]);
+    int find_parent(int u) {
+        if (parent[u] == u)
+            return u;
+
+        return parent[u]=find_parent(parent[u]);
     }
-    void unionset(int u, int v)
-    {
 
-        u = findparent(u);
-        v = findparent(v);
+    void union_nodes(int u, int v) {
+        int p1 = find_parent(u), p2 = find_parent(v);
+        if(p1==p2)return;
+        int rank1 = rank[p1], rank2 = rank[p2];
 
-
-        if (rank[u] == rank[v])
-        {
-           	//If rank is same
-            parent[v] = u;
-            rank[u]++;
-        }
-
-       	//If rank different--> Connect Lower rank tree to higher tree
-
-        else
-        {
-            if (rank[u] > rank[v])
-            {
-                parent[v] = u;
-            }
-            else parent[u] = v;
-        }
+        if (rank1 == rank2) {
+            rank[p1] += 1;
+            parent[p2] = p1;
+        } else if (rank1 > rank2) {
+            parent[p2] = p1;
+        } else
+            parent[p1] = p2;
     }
 };
